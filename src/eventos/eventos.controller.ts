@@ -6,8 +6,13 @@ export class EventosController {
     constructor(private readonly eventService: EventosService){}
 
     @Get()
-    getAll(){
-        return this.eventService.getEventos()
+    getSomeEvents(){
+       return this.eventService.getSomeEvents(1, 10, "Encontro de verão")
+    }
+
+    @Get('/eventos')
+    getAllEvents(){
+        return this.eventService.getAllEvents()
     }
 
 }
