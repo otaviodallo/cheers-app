@@ -13,28 +13,21 @@ export class EventosService {
     }
 
     getSomeEvents(page: number, size: number, filter?: string): Evento[] {
-        const eventos = this.eventosDb.eventos
-        const startIndex = (page - 1) * size;
-        const endIndex = startIndex + size;
+      const eventos = this.eventosDb.eventos;
+
+      const eventosFiltrados = eventos.filter(evento =>
+        !evento.excluido && evento.ativo && evento.publico
+      );
     
-        const eventosPaginados = eventos.slice(startIndex, endIndex);
+      const eventosFiltradosComFiltro = eventosFiltrados.filter(evento => 
+        filter ? 
+        evento.titulo.toLowerCase().includes(filter.toLowerCase()) : true
+      );
     
-        const eventosFiltrados = filter
-          ? eventosPaginados.filter(evento => (
-              !evento.excluido &&
-              evento.ativo &&
-              evento.publico &&
-              evento.titulo.toLowerCase().includes(filter.toLowerCase())
-            ))
-          : eventosPaginados;
+      const startIndex = (page - 1) * size;
+      const endIndex = startIndex + size;
+      const eventosPaginados = eventosFiltradosComFiltro.slice(startIndex, endIndex);
     
-        return eventosFiltrados;
-      }
-    
-      private dateToString(data: Date): string {
-        const year = data.getFullYear();
-        const month = (data.getMonth() + 1).toString().padStart(2, '0');
-        const day = data.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      }
+      return eventosPaginados;
+    }
     }

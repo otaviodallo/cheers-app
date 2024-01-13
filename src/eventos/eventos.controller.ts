@@ -7,7 +7,7 @@ export class EventosController {
 
     @Get()
     getSomeEvents(){
-       return this.eventService.getSomeEvents(1, 10, "Encontro de verão")
+       return this.eventService.getSomeEvents(1, 3, "+55 BAR")
     }
 
     @Get('/eventos')
