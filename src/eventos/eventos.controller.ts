@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { EventosService } from './eventos.service';
 
 @Controller('eventos')
@@ -7,10 +7,15 @@ export class EventosController {
 
     @Get()
     getSomeEvents(){
-       return this.eventService.getSomeEvents(1, 3, "+55 BAR")
+       /* EXEMPLOS: getSomeEvents(1,5 "+55 BAR") - getSomeEvents(2, 5, "2024-02-20"). 
+       Aconselho dar get no localhost:3000/eventos/all e pegar os titulos e data de lá. Data funciona apenas igual no exemplo acima.
+       */
+       const eventos = this.eventService.getSomeEvents(1, 5, "2024-03-10")
+       return eventos
     }
 
-    @Get('/eventos')
+
+    @Get('/all')
     getAllEvents(){
         return this.eventService.getAllEvents()
     }

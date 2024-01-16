@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EventosModule } from './eventos/db/eventos.module';
+import { EventosModule } from './eventos/eventos.module';
 
 @Module({
   controllers: [AppController],
