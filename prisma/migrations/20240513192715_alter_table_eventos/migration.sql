@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "eventos" ALTER COLUMN "ativo" DROP DEFAULT,
+ALTER COLUMN "excluido" DROP DEFAULT,
+ALTER COLUMN "publico" DROP DEFAULT;
